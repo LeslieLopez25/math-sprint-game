@@ -45,7 +45,7 @@ let valueY = 0;
 function bestScoresToDOM() {
   bestScores.forEach((bestScore, index) => {
     const bestScoreEl = bestScore;
-    bestScoreEl.textContent = `${bestScoreArray[index].bestScore}`;
+    bestScoreEl.textContent = `${bestScoreArray[index].bestScore}s`;
   });
 }
 
@@ -71,9 +71,9 @@ function updateBestScore() {
     // SELECT CORRECT BEST SCORE TO UPDATE
     if (questionAmount == score.questions) {
       // RETURN BEST SCORE AS NUMBER WITH ONE DECIMAL
-      const savedBestScore = Number(bestScoreArray[index].bestScore);
+      const savedBestScore = parseInt(bestScoreArray[index].bestScore);
       // UPDATE IF THE NEW FINAL SCORE IS LESS OR REPLACING ZERO
-      if (savedBestScore === 0 || savedBestScore < finalTime) {
+      if (savedBestScore === 0 || savedBestScore > finalTime) {
         bestScoreArray[index].bestScore = finalTimeDisplay;
       }
     }
@@ -298,8 +298,8 @@ startForm.addEventListener("click", () => {
 });
 
 // EVENT LISTENERS
-startForm.addEventListener("submit", selectQuestionAmount);
 gamePage.addEventListener("click", startTimer);
+startForm.addEventListener("submit", selectQuestionAmount);
 
 // ON LOAD
 getSavedBestScores();
